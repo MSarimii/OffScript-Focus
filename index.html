@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pomodoro — Focus Timer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app" id="app">
+
+    <header class="header">
+      <span class="logo">OFFSCRIPT<em>·focus</em></span>
+      <button class="settings-btn" id="settingsToggle" aria-label="Open settings">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+      </button>
+    </header>
+
+    <main class="main">
+
+      <div class="mode-label" id="modeLabel">
+        <span class="mode-dot" id="modeDot"></span>
+        <span id="modeName">Focus</span>
+      </div>
+
+      <div class="timer-shell">
+        <svg class="ring-svg" viewBox="0 0 320 320" aria-hidden="true">
+          <circle class="ring-track" cx="160" cy="160" r="148"/>
+          <circle class="ring-progress" id="ringProgress" cx="160" cy="160" r="148"/>
+        </svg>
+        <div class="timer-face">
+          <div class="time-display" id="timeDisplay" aria-live="polite" aria-label="Time remaining">25:00</div>
+          <div class="session-tag" id="sessionTag">Session 1</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="ctrl-btn secondary" id="resetBtn" aria-label="Reset timer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="1 4 1 10 7 10"/>
+            <path d="M3.51 15a9 9 0 1 0 .49-4.77"/>
+          </svg>
+        </button>
+        <button class="ctrl-btn primary" id="startPauseBtn" aria-label="Start timer">
+          <svg class="icon-play" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <polygon points="6 3 20 12 6 21 6 3"/>
+          </svg>
+          <svg class="icon-pause hidden" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
+          </svg>
+        </button>
+        <button class="ctrl-btn secondary" id="skipBtn" aria-label="Skip to next phase">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/>
+          </svg>
+        </button>
+      </div>
+
+    </main>
+
+    <div class="divider"></div>
+
+    <section class="history-section" id="historySection">
+      <div class="history-header">
+        <h2 class="history-title">Today's Sessions</h2>
+        <span class="history-count" id="historyCount"></span>
+      </div>
+      <div class="history-list" id="historyList">
+        <p class="empty-state">No sessions yet. Start focusing.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="settings-panel" id="settingsPanel" role="dialog" aria-modal="true" aria-label="Timer settings" hidden>
+    <div class="settings-inner">
+      <div class="settings-header">
+        <h2>Settings</h2>
+        <button class="close-btn" id="closeSettings" aria-label="Close settings">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="setting-row">
+        <label for="focusInput">Focus duration</label>
+        <div class="input-wrap">
+          <input type="number" id="focusInput" min="1" max="90" value="25" aria-label="Focus duration in minutes" />
+          <span>min</span>
+        </div>
+      </div>
+      <div class="setting-row">
+        <label for="breakInput">Break duration</label>
+        <div class="input-wrap">
+          <input type="number" id="breakInput" min="1" max="30" value="5" aria-label="Break duration in minutes" />
+          <span>min</span>
+        </div>
+      </div>
+      <button class="apply-btn" id="applySettings">Apply</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <div class="completion-flash" id="completionFlash" aria-hidden="true">
+    <div class="flash-inner">
+      <div class="flash-icon" id="flashIcon">✓</div>
+      <div class="flash-text" id="flashText">Focus session complete</div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
